@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <title>Power Ranger : Megaforce</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Oswald|Roboto+Mono&display=swap" rel="stylesheet">
+
+    <style>
+        .modalA {
+            position: fixed;
+            font-family: Arial, Helvetica, sans-serif;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 99999;
+            opacity: 0;
+            -webkit-transition: opacity 400ms ease-in;
+            -moz-transition: opacity 400ms ease-in;
+            transition: opacity 400ms ease-in;
+            pointer-events: none;
+        }
+
+        .modalA:target {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modalA>div {
+            width: 500px;
+            height: auto;
+            position: relative;
+            z-index: 9999;
+            margin: 30px auto;
+            padding: 10px 10px 10px 10px;
+            border-radius: 20px;
+            background: gold;
+            /* background: -moz-linear-gradient(#fff, #999);
+            background: -webkit-linear-gradient(#fff, #999);
+            background: -o-linear-gradient(#fff, #999); */
+        }
+
+        .closeA {
+            background: white;
+            color: black;
+            line-height: 25px;
+            position: absolute;
+            right: -12px;
+            text-align: center;
+            top: -10px;
+            width: 24px;
+            text-decoration: none;
+            font-weight: bold;
+            -webkit-border-radius: 12px;
+            -moz-border-radius: 12px;
+            border-radius: 12px;
+            -moz-box-shadow: 1px 1px 3px #000;
+            -webkit-box-shadow: 1px 1px 3px #000;
+            box-shadow: 1px 1px 3px #000;
+        }
+
+        .closeA:hover {
+            background: #00d9ff;
+        }
+
+        .topmenu li {
+            color: white;
+            display: inline-block;
+        }
+
+        .slider {
+            width: 100%;
+
+            object-fit: cover;
+        }
+
+        .gam {
+            width: 100%;
+            height: 100px;
+            float: left;
+
+        }
+
+        .topnav a {
+            float: left;
+            color: whitesmoke;
+            text-align: center;
+            height: auto;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .car-img {
+            width: 100%;
+            object-fit: cover;
+            height: 500px;
+        }
+
+        .topnav a:hover {
+            color: yellow;
+        }
+
+        .topnav a.active {
+
+            color: goldenrod;
+        }
+
+        .logotop {
+            height: 84px;
+            width: 30%;
+        }
+
+        .menu li {
+            display: inline-block;
+            padding: 32px 16px;
+            font-weight: bold;
+            color: rosybrown;
+            font-size: 20px
+        }
+
+        body {
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .blurimg {
+            filter: blur(8px);
+            -webkit-filter: blur(8px);
+            width: 100%;
+            object-fit: cover;
+            height: 500px;
+
+        }
+
+        .bg-text {
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/opacity/see-through */
+            color: white;
+            font-weight: bold;
+            border: 3px solid #f1f1f1;
+            position: relative;
+            bottom: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            width: 80%;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .open-button {
+            background-color: #555;
+            color: white;
+            padding: 16px 20px;
+            border: none;
+            cursor: pointer;
+            opacity: 0.8;
+            position: fixed;
+            bottom: 23px;
+            right: 28px;
+            width: 280px;
+        }
+
+        input[type=text],
+        input[type=password] {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 10px 0;
+            /* display: inline-block; */
+            border: none;
+            background: #f1f1f1;
+        }
+
+        /* Add a background color when the inputs get focus */
+        input[type=text]:focus,
+        input[type=password]:focus {
+            background-color: #ddd;
+            outline: none;
+        }
+
+        .menu li:hover {
+            background-color: white;
+            height: 84px;
+        }
+
+        .carousel-caption {
+            z-index: 1;
+        }
+
+        .carousel-indicators {
+            z-index: 1;
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+
+    <header>
+        <div class="container-fluid"
+            style="background-color: black;height: 84px; position: fixed; top: 0; left: 0; z-index: 2;">
+            <div class="row">
+                <div class="col-4 ">
+                    <img class="logotop" src="../Final Project/21068-1-power-rangers-transparent-image-thumb.png">
+                </div>
+                <div class="col-8 text-right">
+                    <ul class="menu">
+                        <li>
+                            <a href="#" style="text-decoration: none;">GoGo!</a>
+                        </li>
+                        <li>
+                            <a href="#about" style="text-decoration: none;">Power Rangers</a>
+                        </li>
+                        <li>
+                            <a href="#megazord" style="text-decoration: none;">Megazord</a>
+                        </li>
+                        <li>
+                            <a href="#marchendise" style="text-decoration: none;">Marchendise</a>
+                        </li>
+
+                        <li>
+                            <a href="#openmodal" style="text-decoration: none;">Register</a>
+                            <div id="openmodal" class="modalA">
+                                <div>
+                                    <a href="#close" title="Close" class="closeA">X</a>
+
+                                    <form action="https://formspree.io/mleeyvgv" method="POST">
+                                        <div class="container" style="overflow-inline: scroll">
+                                            <label for="email" style="color: black; font-size: medium;">Email</label>
+                                            <input type="text" placeholder="Enter Email" name="email" required
+                                                style="box-sizing: 10px;">
+                                            <label for="fn" style="color: black; font-size: medium;">First
+                                                Name</label>
+                                            <input type="text" placeholder="Enter First Name" name="firstname" required>
+                                            <label for="ln" style="color: black;font-size: medium;">Last
+                                                Name</label>
+                                            <input type="text" placeholder="Enter Last Name" name="lastname" required>
+
+                                            <label for="Telp" style="color: black; font-size: medium;">Telephone</label>
+                                            <input type="text" placeholder="Enter Phone Number" name="phone" required>
+                                            <input type="submit" value="submit">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div style="height: 100px;"></div>
+    <div id="carouselExampleControls" class="carousel slide container slider" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class=" car-img carousel-item active">
+                <img src="http://hdviewer.com/wp-content/uploads/2017/09/Power-Rangers-HD-Movie-Wallpaper.jpg"
+                    class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5 style="color: black;">Testing Bro</h5>
+                    <p style="color: greenyellow;">Power Rangers is an American entertainment and merchandising
+                        franchise
+                        built around a live-action
+                        superhero television series, based on the Japanese tokusatsu franchise Super Sentai. Produced
+                        first by Saban Entertainment, second by BVS Entertainment, later by Saban Brands, and today by
+                        SCG Power Rangers and Hasbro, the Power Rangers television series takes much of its footage from
+                        the Super Sentai television series, produced by Toei Company.[1] The first Power Rangers entry,
+                        Mighty Morphin Power Rangers, debuted on August 28, 1993, and helped launch the Fox Kids
+                        programming block of the 1990s, during which it catapulted into popular culture along with a
+                        line of action figures and other toys by Bandai.[2] By 2001, the media franchise had generated
+                        over $6 billion in toy sales.</p>
+                </div>
+            </div>
+            <div class="car-img carousel-item">
+                <img src="https://wallpapercave.com/wp/wp2683029.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Testing Bro</h5>
+                    <p>Mantep Bro</p>
+                </div>
+            </div>
+            <div class="car-img carousel-item">
+                <img style="background-color: black; ;" src="https://images.alphacoders.com/705/705099.jpg"
+                    class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Testing Bro</h5>
+                    <p>Mantep Bro</p>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    <div style="height: 100px;" id="about"></div>
+    <div id="carouselExampleIndicators1" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators1" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators1" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators1" data-slide-to="2"></li>
+
+        </ol>
+        <div class="carousel-inner">
+            <div class="carrousel-item active" style="background-color: red;">
+                <div class="row d-block w-100">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm">
+                                <h2>Red Ranger</h2>
+                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veniam accusamus
+                                    laudantium
+                                    ex autem iste
+                                    facilis commodi assumenda vitae suscipit ea amet iusto incidunt, repellat enim!
+                                    Possimus non fugiat
+                                    vitae harum!</p>
+                            </div>
+                            <div class="col-sm">
+                                <img src="https://is5-ssl.mzstatic.com/image/thumb/Video115/v4/ce/9d/4d/ce9d4d41-0581-14a2-d64e-25e2c064d8e6/pr_source.lsr/268x0w.png"
+                                    alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="carousel-item " style="background-color: blue;">
+                    <div class="row d-block w-100">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm">
+                                    <h2>Blue Ranger</h2>
+                                    <p> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veniam accusamus
+                                        laudantium ex autem iste
+                                        facilis commodi assumenda vitae suscipit ea amet iusto incidunt, repellat enim!
+                                        Possimus non fugiat
+                                        vitae harum!
+                                    </p>
+                                </div>
+                                <div class="col-sm">
+                                    <img src="https://musicimage.xboxlive.com/catalog/video.movie.8D6KGWZL5V1C/image?locale=en-us&mode=crop&purposes=BoxArt&q=90&h=225&w=150&format=jpg"
+                                        alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" style="background-color: pink;">
+                    <div class="row d-block w-100">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm">
+                                    <h2>Pink Ranger</h2>
+                                    <p> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veniam accusamus
+                                        laudantium ex autem iste
+                                        facilis commodi assumenda vitae suscipit ea amet iusto incidunt, repellat
+                                        enim!
+                                        Possimus non fugiat
+                                        vitae harum!</p>
+
+                                </div>
+                                <div class="col-sm">
+                                    <img src="https://upload.wikimedia.org/wikipedia/en/9/97/The_Predator_official_poster.jpg"
+                                        alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls1" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls1" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+
+    </div>
+    <div style="height: 50px;"></div>
+
+    <div class="container" style=" height: 500px;" id="megazord">
+        <img src="../Final Project/megazord.jpg" class="blurimg">
+        <div class="bg-text">
+            <p> The Megazord (retroactively referred to as the Dino Megazord or the Original Megazord) is the
+                combination of
+                the five Dinozords: Tyrannosaurus, Mastodon, Triceratops, Sabertooth Tiger, and Pterodactyl.
+                This is
+                the
+                first Megazord to be featured in Power Rangers, but within the chronology of the series may have
+                been
+                preceded by other Zord combinations in the distant past.
+            </p>
+        </div>
+    </div>
+    <div style="height: 50px;"></div>
+    <br>
+    <h1 style="text-align: center;"> <b>The Enemies</b> </h1>
+    <br><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-6" style=" height: 400px; text-align: center; text-align: left;">
+                <h2>Rita Repulsa</h2>
+                <p>Rita Repulsa was the primary antagonist for the first 60 episodes,[1] and was relegated to
+                    the
+                    position of secondary antagonist after the changing of the zords. She also married Lord
+                    Zedd.
+                    She is
+                    a witch who is the daughter of the first demonic overlord of the M51 Galaxy, Master Vile.
+                    Her
+                    brother Rito is a bumbler, and completely incompetent. She also had a child with Zedd named
+                    Thrax,
+                    who was sealed away at some point between 1998 and 2007, who would have only been at most
+                    two
+                    years
+                    old when his parents were turned back into non-powered humanoid aliens. This could easily be
+                    perceived as them being killed, since the people they were died when Zordon did, and the
+                    people
+                    they
+                    were before that are put in their place, whilst her father, and her brother were not so
+                    lucky
+                    for
+                    unspecified reasons.
+                </p>
+            </div>
+            <div class="col">
+                <img src="https://i.ytimg.com/vi/X55sP2TVTZw/maxresdefault.jpg "
+                    style="max-width:100%; max-height:80%; align-content: center;">
+            </div>
+
+        </div>
+        <div style="height: 50px;"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-6" style=" height: 600px; text-align: center; text-align: left;">
+                    <img src="https://img.cinemablend.com/filter:scale/quill/7/7/0/8/f/9/7708f9e1720c109b206fd856411444ae24c61152.jpg?fw=1200 "
+                        style="max-width:100%; max-height:80%; align-content: center;">
+                </div>
+                <div class="col">
+                    <h2>Goldar</h2>
+                    <p>Goldar is a manticore/griffin-themed knight who serves as Rita Repulsa and Lord Zedd's
+                        right-hand
+                        man. In season one, he is a considerably more competent fighter, who is shown fighting
+                        alongside
+                        Scorpina, whom his Sentai Counterpart was married to, since it's implied but not really
+                        developed upon at any point, unlike the Grifforizer/Lami relationship in Zyuranger. From
+                        season
+                        2 onwards, he's a considerably less capable fighter, gradually transitioning to comic
+                        relief,
+                        since the stunt double in the suit for original footage clearly was unable/ not allowed
+                        to
+                        show
+                        how maneuverable the character was, from season 3 onwards he's frequently seen working
+                        with
+                        a
+                        villain with far more credible threat in the Sentai series season 3 is based on,
+                        otherwise
+                        known
+                        as Rito Revolto. Spin describes him as a "big freak with wings".[2] Goldar frequently
+                        does
+                        battle with the megazord ,during the first season, if the episode's monster or device
+                        had
+                        already been dispatched by the Rangers. Scorpina (and later, Rito through the usage of
+                        stock
+                        footage, and careful editing,) would aid Goldar in these Megazord battles.
+                    </p>
+
+                </div>
+
+            </div>
+        </div>
+        <div id="marchendise" style="height: 80px;text-align: center;">
+            <h1>MARCHENDISE</h1>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <img style="height: 100%; width: 100%;"
+                        src="https://cdn11.bigcommerce.com/s-cf7jv97qb3/images/stencil/1280x1280/products/10423/81318/949ff6b593539df75535e99b26be7242a515fd3bb6db1306d3cf85a5d6c04c9d__98751.1560248724.jpg?c=2">
+                    <div class="col-sm">
+                        Gold Ranger Toys <br>
+                        <button class="btn btn-rounded btn-primary">Add to Cart<i
+                                class="fas fa-heart pl-1"></i></button>
+                        <button type="button" class="btn btn-rounded btn-primary" data-toggle="modal"
+                            data-target="#exampleModal">
+                            Detail</button>
+                        <br> <b>Rp. 500.000</b>
+
+                    </div>
+
+
+                </div>
+                <div class="col-sm">
+                    <img style="height: 100%; width: 100%;"
+                        src="https://cdn11.bigcommerce.com/s-cf7jv97qb3/images/stencil/1280x1280/products/10423/81318/949ff6b593539df75535e99b26be7242a515fd3bb6db1306d3cf85a5d6c04c9d__98751.1560248724.jpg?c=2">
+                    <div class="col-sm">
+                        Gold Ranger Toys <br>
+                        <button class="btn btn-rounded btn-primary">Add to Cart<i
+                                class="fas fa-heart pl-1"></i></button>
+                        <button type="button" class="btn btn-rounded btn-primary" data-toggle="modal"
+                            data-target="#exampleModal">
+                            Detail</button>
+                        <br> <b>Rp. 500.000</b>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <img style="height: 100%; width: 100%;"
+                        src="https://cdn11.bigcommerce.com/s-cf7jv97qb3/images/stencil/1280x1280/products/10423/81318/949ff6b593539df75535e99b26be7242a515fd3bb6db1306d3cf85a5d6c04c9d__98751.1560248724.jpg?c=2">
+                    <div class="col-sm">
+                        Gold Ranger Toys <br>
+                        <button class="btn btn-rounded btn-primary">Add to Cart<i
+                                class="fas fa-heart pl-1"></i></button>
+                        <button type="button" class="btn btn-rounded btn-primary" data-toggle="modal"
+                            data-target="#exampleModal">
+                            Detail</button>
+
+                        <br> <b>Rp. 500.000</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 100px;" id="marchendise" class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img class="d-block w-100" style="height: 50%; width: 50%;"
+                                    src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcS3O8Eimc3pSC-zFy_er3LMHRbUy2T6-sZUhoiGNtt2suqnBLgAny6AEgW08yRBysixX5w0kkag1xnIL9LwvvMB5PrS0E_BSwbhZZBRTbESVu079ndEcSGyrg&usqp=CAE"
+                                    alt="First slide">
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block w-100" style="height: 50%; width: 50%; opacity: 50%;"
+                                    src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcS3O8Eimc3pSC-zFy_er3LMHRbUy2T6-sZUhoiGNtt2suqnBLgAny6AEgW08yRBysixX5w0kkag1xnIL9LwvvMB5PrS0E_BSwbhZZBRTbESVu079ndEcSGyrg&usqp=CAE"
+                                    alt="Second slide">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5 style="color: black;">Paling Murah</h5>
+                                    <p style="color: black;">Rp. 1.500.000,-</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
+                            data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button"
+                            data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                    Dino Zord Toys <br>
+                    <button class="btn btn-rounded btn-primary">Add to Cart<i class="fas fa-heart pl-1"></i></button>
+                    <button type="button" class="btn btn-rounded btn-primary" data-toggle="modal"
+                        data-target="#exampleModal1">
+                        Detail</button>
+
+                    <br> <b>Rp. 1.500.000</b>
+                </div>
+                <div class="col-sm-4">
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img class="d-block w-100" style="height: 50%; width: 50%;"
+                                    src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcS3O8Eimc3pSC-zFy_er3LMHRbUy2T6-sZUhoiGNtt2suqnBLgAny6AEgW08yRBysixX5w0kkag1xnIL9LwvvMB5PrS0E_BSwbhZZBRTbESVu079ndEcSGyrg&usqp=CAE"
+                                    alt="First slide">
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block w-100" style="height: 50%; width: 50%;opacity: 50%;"
+                                    src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcS3O8Eimc3pSC-zFy_er3LMHRbUy2T6-sZUhoiGNtt2suqnBLgAny6AEgW08yRBysixX5w0kkag1xnIL9LwvvMB5PrS0E_BSwbhZZBRTbESVu079ndEcSGyrg&usqp=CAE"
+                                    alt="Second slide">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5 style="color: black;">Paling Murah</h5>
+                                    <p style="color: black;">Rp. 1.500.000,-</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
+                            data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button"
+                            data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                    Dino Zord Toys <br>
+                    <button class="btn btn-rounded btn-primary">Add to Cart<i class="fas fa-heart pl-1"></i></button>
+                    <button type="button" class="btn btn-rounded btn-primary" data-toggle="modal"
+                        data-target="#exampleModal1">
+                        Detail</button>
+
+                    <br> <b>Rp. 1.500.000</b>
+                </div>
+                <div class="col-sm-4">
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img class="d-block w-100" style="height: 50%; width: 50%;"
+                                    src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcS3O8Eimc3pSC-zFy_er3LMHRbUy2T6-sZUhoiGNtt2suqnBLgAny6AEgW08yRBysixX5w0kkag1xnIL9LwvvMB5PrS0E_BSwbhZZBRTbESVu079ndEcSGyrg&usqp=CAE"
+                                    alt="First slide">
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block w-100" style="height: 50%; width: 50%;opacity: 50%;"
+                                    src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcS3O8Eimc3pSC-zFy_er3LMHRbUy2T6-sZUhoiGNtt2suqnBLgAny6AEgW08yRBysixX5w0kkag1xnIL9LwvvMB5PrS0E_BSwbhZZBRTbESVu079ndEcSGyrg&usqp=CAE"
+                                    alt="Second slide">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5 style="color: black;">Paling Murah</h5>
+                                    <p style="color: black;">Rp. 1.500.000,-</p>
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
+                                data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleControls" role="button"
+                                data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                        Dino Zord Toys <br>
+                        <button class="btn btn-rounded btn-primary">Add to Cart<i
+                                class="fas fa-heart pl-1"></i></button>
+                        <button type="button" class="btn btn-rounded btn-primary" data-toggle="modal"
+                            data-target="#exampleModal1">
+                            Detail</button>
+                        <br>
+                        <b>Rp. 1.500.000</b>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="page-footer font-small blue">
+
+                <!-- Copyright -->
+                <div class="footer-copyright text-center py-3">© 2018 Copyright:
+                    <a href="http://www.nick.co.uk/shows/power-rangers-megaforce/5de20h"> nick.co.uk</a>
+                </div>
+                <!-- Copyright -->
+
+            </footer>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body col-sm">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure voluptatum minima
+                            maxime
+                            laborum facilis amet quasi provident possimus molestiae quas similique totam a saepe
+                            sint
+                            doloribus, rerum accusamus aliquam veniam.
+                        </div>
+                        <div class="modal-body col-sm">
+                            <img src="https://images-na.ssl-images-amazon.com/images/I/81bxYR-pZvL._SX425_.jpg" alt="">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Dino Zord</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body col-sm">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure voluptatum minima
+                            maxime
+                            laborum facilis amet quasi provident possimus molestiae quas similique totam a saepe
+                            sint
+                            doloribus, rerum accusamus aliquam veniam.
+                        </div>
+                        <div class="modal-body col-sm">
+                            <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcS3O8Eimc3pSC-zFy_er3LMHRbUy2T6-sZUhoiGNtt2suqnBLgAny6AEgW08yRBysixX5w0kkag1xnIL9LwvvMB5PrS0E_BSwbhZZBRTbESVu079ndEcSGyrg&usqp=CAE"
+                                alt="">
+                        </div>
+
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+</body>
+<script>
+
+</script>
+
+</html>
